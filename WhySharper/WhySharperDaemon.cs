@@ -6,6 +6,9 @@ using JetBrains.ReSharper.Daemon.Impl;
 
 namespace WhySharper
 {
+    /// <summary>
+    /// Analyses the currently opened file - finds all R# errors, warnings and suggestions.
+    /// </summary>
     public class WhySharperDaemon : DaemonProcessBase
     {
         public WhySharperDaemon(IProjectFile projectFile) : base(projectFile) { }
@@ -19,11 +22,18 @@ namespace WhySharper
             get { return _highlightings; }
         }
 
+        /// <summary>
+        /// Performs highlighting of the currently opened document.
+        /// </summary>
         public void DoHighlighting()
         {
             DoHighlighting(DaemonProcessKind.VISIBLE_DOCUMENT, Commiter);
         }
 
+        /// <summary>
+        /// Adds all highlightings to a list that will be used to display the "Why?" popup.
+        /// </summary>
+        /// <param name="context"></param>
         private void Commiter(DaemonCommitContext context)
         {
             _highlightings.AddRange(context.HighlightingsToAdd);
