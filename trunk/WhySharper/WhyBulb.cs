@@ -121,7 +121,7 @@ namespace WhySharper
                 Process.Start(url);
             } 
             else {
-                var menuItem = new SimpleMenuItem {Text = "Would you mind creating a bug so that we add one?"};
+                var menuItem = new SimpleMenuItem {Text = "Would you mind creating a bug so that we add one?", Style = MenuItemStyle.Enabled};
                 menuItem.Clicked += delegate { Process.Start(SubmitBugUrl); };
                 var menuItems = new List<SimpleMenuItem>(1) { menuItem };
                 DisplayMenu(menuItems, "WhySharper doesn't know about an explanation to this.");
