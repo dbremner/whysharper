@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.Bulbs;
 using JetBrains.ReSharper.Intentions;
 using JetBrains.ReSharper.Intentions.CSharp.ContextActions;
 using JetBrains.ReSharper.Intentions.CSharp.ContextActions.Util;
 using JetBrains.TextControl;
-using JetBrains.UI.PopupMenu;
 
 namespace WhySharper
 {
