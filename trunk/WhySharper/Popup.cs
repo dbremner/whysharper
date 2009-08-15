@@ -28,6 +28,21 @@ namespace WhySharper
             Display(caption, menuItems);
         }
 
+        public static void Display(string caption, string singleItem)
+        {
+            Display(caption, singleItem, null);
+        }
+
+        private static void Display(string caption, string singleItem, EventHandler onClick)
+        {
+            var item = new SimpleMenuItem { Text = singleItem };
+            if (onClick != null) {
+                item.Style = MenuItemStyle.Enabled;
+                item.Clicked += onClick;
+            }
+            Display(caption, new List<SimpleMenuItem> {item});
+        }
+
         private static SimpleMenuItem CreateMenuItem(HighlightingInfo info)
         {
             string problemName = info.Highlighting.GetType().Name;
@@ -51,10 +66,7 @@ namespace WhySharper
             else
             {
                 const string text = "Do you want to create a bug so that we can find an explanation and link to it?";
-                var menuItem = new SimpleMenuItem { Text = text, Style = MenuItemStyle.Enabled };
-                menuItem.Clicked += delegate { Process.Start(SubmitBugUrl); };
-                var menuItems = new List<SimpleMenuItem>(1) { menuItem };
-                Display("No explanation to this os far.", menuItems);
+                Display("No explanation to this so far.", text, delegate { Process.Start(SubmitBugUrl); });
             }
         }
 

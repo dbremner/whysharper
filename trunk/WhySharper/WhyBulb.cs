@@ -74,8 +74,7 @@ namespace WhySharper
                 Popup.Display("Why R# suggests", myDeamon.Highlightings);
             }
             catch (Exception ex) {
-                var menuItems = new List<SimpleMenuItem>(1) { new SimpleMenuItem { Text = ex.ToString() } };
-                Popup.Display("exception", menuItems);
+                Popup.Display("Exception", ex.ToString());
             }
         }
     }
