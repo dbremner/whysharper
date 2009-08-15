@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Popup.cs" />
     <Compile Include="WhyBulb.cs" />
     <Compile Include="WhySharperDaemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
