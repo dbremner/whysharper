@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.UI.PopupMenu;
 using JetBrains.UI.RichText;
 
-namespace WhySharper
+namespace WhySharper.Suggestions
 {
     internal static class Popup
     {
@@ -36,11 +36,12 @@ namespace WhySharper
         private static void Display(string caption, string singleItem, EventHandler onClick)
         {
             var item = new SimpleMenuItem { Text = singleItem };
-            if (onClick != null) {
+            if (onClick != null)
+            {
                 item.Style = MenuItemStyle.Enabled;
                 item.Clicked += onClick;
             }
-            Display(caption, new List<SimpleMenuItem> {item});
+            Display(caption, new List<SimpleMenuItem> { item });
         }
 
         private static SimpleMenuItem CreateMenuItem(HighlightingInfo info)
@@ -63,8 +64,7 @@ namespace WhySharper
             if (url != string.Empty) {
                 Process.Start(url);
             }
-            else
-            {
+            else {
                 const string text = "Do you want to create a bug so that we can find an explanation and link to it?";
                 Display("No explanation to this so far.", text, delegate { Process.Start(SubmitBugUrl); });
             }
@@ -78,13 +78,16 @@ namespace WhySharper
         /// <returns></returns>
         private static string GetExplanationUrl(string name)
         {
-            if (name == typeof(MemberCanBeMadeStaticLocalWarning).Name) {
+            if (name == typeof(MemberCanBeMadeStaticLocalWarning).Name)
+            {
                 return "http://stackoverflow.com/questions/169378/c-method-can-be-made-static-but-should-it";
             }
-            else if (name == typeof(ConvertToConstantLocalWarning).Name) {
+            else if (name == typeof(ConvertToConstantLocalWarning).Name)
+            {
                 return "http://stackoverflow.com/questions/909681/resharper-always-suggesting-me-to-make-const-string-instead-of-string";
             }
-            else if (name == typeof(UnusedUsingDirectiveWarning).Name) {
+            else if (name == typeof(UnusedUsingDirectiveWarning).Name)
+            {
                 return "http://stackoverflow.com/questions/235250/what-are-the-benefits-of-maintaining-a-clean-list-of-using-directives-in-c";
             }
             return string.Empty;
