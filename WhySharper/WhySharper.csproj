@@ -91,12 +91,20 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Popup.cs" />
+    <Compile Include="Suggestions\Suggestion.cs" />
+    <Compile Include="Suggestions\SuggestionBrowser.cs" />
+    <Compile Include="Suggestions\Suggestor.cs" />
     <Compile Include="WhyBulb.cs" />
-    <Compile Include="WhySharperDaemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Suggestions\Suggestions.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
