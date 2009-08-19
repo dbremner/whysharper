@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<suggestions>
+  <suggestion name="MemberCanBeMadeStaticLocalWarning">
+    <links>
+      <link name="C# method can be made static, but should it?" relevance="good">http://stackoverflow.com/questions/169378/c-method-can-be-made-static-but-should-it</link>
+      <link name="C#: ReSharper complains when method can be static, but isn’t." relevance="moderate">http://stackoverflow.com/questions/790281/c-resharper-complains-when-method-can-be-static-but-isnt</link>
+    </links>
+  </suggestion>
+  <suggestion name="ConvertToConstantLocalWarning">
+    <links>
+      <link name="Resharper always suggesting me to make const string instead of string.">http://stackoverflow.com/questions/909681/resharper-always-suggesting-me-to-make-const-string-instead-of-string</link>
+    </links>
+  </suggestion>
+  <suggestion name="UnusedUsingDirectiveWarning">
+    <links>
+      <link name="What are the benefits of maintaining a 'clean' list of using directives in C#?">http://stackoverflow.com/questions/235250/what-are-the-benefits-of-maintaining-a-clean-list-of-using-directives-in-c</link>
+    </links>
+  </suggestion>  
+</suggestions>
