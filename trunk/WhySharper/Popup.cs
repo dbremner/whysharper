@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using JetBrains.CommonControls;
 using JetBrains.UI.PopupMenu;
+using WhySharper.Suggestions;
 
-namespace WhySharper.Suggestions
+namespace WhySharper
 {
     /// <summary>
     /// Displays WhySharper popup messages.
