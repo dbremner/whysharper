@@ -40,20 +40,20 @@ namespace WhySharper.Suggestions
             var result = new List<Suggestion>();
 
             var file = XDocument.Load(SuggestionsFile);
-
             foreach (var suggestion in file.Descendants("suggestion")) {
                 var name = suggestion.Attribute("name");
-                if (name != null) {
-                    var item = new Suggestion(name.Value);
-                    foreach (var link in suggestion.Elements("links").Elements("link")) {
-                        var linkName = link.Attribute("name");
-                        if (linkName != null) {
-                            item.Links.Add(new KeyValuePair<string, string>(linkName.Value, link.Value));
-                        }
+                if (name == null) continue;
+
+                var item = new Suggestion(name.Value);
+                foreach (var link in suggestion.Elements("links").Elements("link")) {
+                    var linkName = link.Attribute("name");
+                    if (linkName != null) {
+                        item.Links.Add(new KeyValuePair<string, string>(linkName.Value, link.Value));
                     }
-                    result.Add(item);
                 }
+                result.Add(item);
             }
+
             return result;
         }
     }
