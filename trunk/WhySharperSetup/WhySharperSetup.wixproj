@@ -1,0 +1,88 @@
+﻿<Project InitialTargets="CheckWhySharperHomeDir" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- WhySharperHomeDir and WhySharperBinariesDir properties must be defined externally. -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductName>WhySharper</ProductName>
+    <ReSharperVersion2>4.5</ReSharperVersion2>
+    <ProductVersion>1.0.1</ProductVersion>
+    <ProjectGuid>a270fa0f-36da-42be-948c-1b57e885d611</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>$(ProductName) ($(ProductVersion) for R# $(ReSharperVersion2))</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Source files. -->
+    <Compile Include="Main.wxs" />
+    <Compile Include="Properties.wxs" />
+    <!-- Support for the Wizard dialogs. -->
+    <WixExtension Include="WixUIExtension">
+      <HintPath>WixUIExtension</HintPath>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.rtf" />
+    <Content Include="why.ico" />
+  </ItemGroup>
+  
+  <!-- WhySharper installer specific variables go below -->
+  <PropertyGroup>
+    <WhySharperHomeDir>$(MSBuildProjectDirectory)\..</WhySharperHomeDir>
+    <WhySharperBinariesDir Condition="'$(WhySharperBinariesDir)'==''">$(WhySharperHomeDir)\WhySharper\Bin</WhySharperBinariesDir>
+    <CompanyName>codevanced.net</CompanyName>
+    <VsVersion>9.0</VsVersion>
+    <SetupFilesDir>$(WhySharperHomeDir)\WhySharperSetup</SetupFilesDir>
+    <DllGuid>{6f8da124-4828-4a9d-af12-4da4cb725a93}</DllGuid>
+    <SuggestionsXmlGuid>{3920453c-b9ce-4905-b065-cc56f215951d}</SuggestionsXmlGuid>
+    <PdbGuid>{27f9d234-0b57-45e5-9119-21f21f5d2b09}</PdbGuid>
+    <!-- Upgrade code for the plugin. (Should be unique for each of the plugins, but should not change 
+         within the plugin lifetime. All of the plugin versions should feature the same Upgrade Code.) -->
+    <UpgradeCode>{daa7b60f-a984-4b13-bde8-46389929c47a}</UpgradeCode>
+    <DefineSolutionProperties>false</DefineSolutionProperties>
+  </PropertyGroup>
+    
+  <!-- Set the external properties for use in the Wxs source files. -->
+  <PropertyGroup>
+    <DefineConstants>
+      $(DefineConstants);
+      DynProductName=$(ProductName);
+      DynProductVersion=$(ProductVersion);
+      DynCompanyName=$(CompanyName);
+      DynUpgradeCode=$(UpgradeCode);
+      DynVsVersion=$(VsVersion);
+      DynSetupFilesDir=$(SetupFilesDir);
+      DynSuggestionsXmlDir=$(WhySharperHomeDir)\WhySharper\Suggestions;
+      DynDllFileDir=$(WhySharperBinariesDir)\$(Configuration);
+      DynDllGuid=$(DllGuid);
+      DynPdbGuid=$(PdbGuid);
+      DynSuggestionsXmlGuid=$(SuggestionsXmlGuid);
+      DynReSharperVersion2=$(ReSharperVersion2);
+    </DefineConstants>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\wix\v3.0\Wix.targets" />
+  <!-- Checks for the mandatory properties. -->
+  <Target Name="CheckWhySharperHomeDir">
+    <Error Condition="'$(WhySharperHomeDir)'==''" Text="The 'WhySharperHomeDir' property must be defined, pointing to the root WhySharper folder." />
+    <Error Condition="'$(WhySharperBinariesDir)'==''" Text="The 'WhySharperBinariesDir' property must be defined, pointing to the WhySharper Bin folder." />
+  </Target>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>
