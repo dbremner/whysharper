@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using JetBrains.Application;
 using JetBrains.Util;
 
 namespace WhySharper.Suggestions
 {
     internal static class SuggestionBrowser
     {
+        private static readonly string _suggestionsFile = Shell.Instance.InstallDir + "\\Plugins\\WhySharper\\Suggestions.xml";
         private static readonly List<Suggestion> _suggestions = LoadSuggestions();
-        private const string SuggestionsFile = "Suggestions.xml";
 
         /// <summary>
         /// Loads all suggestions from xml.
@@ -38,8 +39,8 @@ namespace WhySharper.Suggestions
         private static List<Suggestion> LoadSuggestionsCore() 
         {
             var result = new List<Suggestion>();
-
-            var file = XDocument.Load(SuggestionsFile);
+            
+            var file = XDocument.Load(_suggestionsFile);
             foreach (var suggestion in file.Descendants("suggestion")) {
                 var name = suggestion.Attribute("name");
                 if (name == null) continue;
