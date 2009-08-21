@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
-using JetBrains.Application;
 using JetBrains.Util;
 
 namespace WhySharper.Suggestions
 {
     internal static class SuggestionBrowser
     {
-        private static readonly string _suggestionsFile = Shell.Instance.InstallDir + "\\Plugins\\WhySharper\\Suggestions.xml";
+        private static readonly string _suggestionsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Suggestions.xml";
         private static readonly List<Suggestion> _suggestions = LoadSuggestions();
 
         /// <summary>
