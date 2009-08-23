@@ -2,8 +2,8 @@
 <suggestions>
   <suggestion name="MemberCanBeMadeStaticLocalWarning">
     <links>
-      <link name="C# method can be made static, but should it?" relevance="good">http://stackoverflow.com/questions/169378/c-method-can-be-made-static-but-should-it</link>
-      <link name="C#: ReSharper complains when method can be static, but isn’t." relevance="moderate">http://stackoverflow.com/questions/790281/c-resharper-complains-when-method-can-be-static-but-isnt</link>
+      <link name="C# method can be made static, but should it?">http://stackoverflow.com/questions/169378/c-method-can-be-made-static-but-should-it</link>
+      <link name="C#: ReSharper complains when method can be static, but isn’t.">http://stackoverflow.com/questions/790281/c-resharper-complains-when-method-can-be-static-but-isnt</link>
     </links>
   </suggestion>
   <suggestion name="ConvertToConstantLocalWarning">
