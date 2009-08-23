@@ -4,9 +4,8 @@ using JetBrains.ReSharper.Intentions;
 using JetBrains.ReSharper.Intentions.CSharp.ContextActions;
 using JetBrains.ReSharper.Intentions.CSharp.ContextActions.Util;
 using JetBrains.TextControl;
-using WhySharper.Suggestions;
 
-namespace WhySharper
+namespace WhySharper.UI
 {
     [ContextAction(Description = "Provides an easy way to find explanations to R# highlightings in the current file.", Name = "Why Resharper suggests", Priority = 0, Group = "C#")]
     public class WhyBulb : CSharpContextActionBase, IBulbItem, IDisableHighlightingAction
@@ -22,7 +21,7 @@ namespace WhySharper
         public WhyBulb(ICSharpContextActionDataProvider provider) : base(provider) { }
 
         /// <summary>
-        /// Used by <see cref="Suggestor"/> to create a new <see cref="WhyBulb"/> for the given highlighting.
+        /// Used by <see cref="SuggestionProvider"/> to create a new <see cref="WhyBulb"/> for the given highlighting.
         /// </summary>
         /// <param name="whyText">Text to be displayed in next to the bulb.</param>
         /// <param name="resharperName">R# name of the corresponding error/warning/suggestion.</param>
@@ -77,7 +76,7 @@ namespace WhySharper
         {
             var suggestion = SuggestionBrowser.GetSuggestion(_resharperName);
             if (suggestion == null || suggestion.Links.Count == 0) {
-                Popup.SubmitSuggestion();
+                Popup.SubmitSuggestion(_resharperName);
                 return;
             }
 

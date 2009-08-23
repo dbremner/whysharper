@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WhySharper.Suggestions
+namespace WhySharper
 {
     /// <summary>
     /// Represents a WhySharper suggestion.
@@ -9,7 +9,7 @@ namespace WhySharper.Suggestions
     {
         /// <summary>
         /// R# type name of the error/warning/suggestion (eg, MemberCanBeMadeStaticLocalWarning, 
-        /// ConvertToConstantLocalWarning, MethodDeclarationInEnumError, etc, etc, etc).
+        /// ConvertToConstantLocalWarning, MethodDeclarationInEnumError, etc, etc).
         /// </summary>
         public string ResharperName { get; private set; }
 
