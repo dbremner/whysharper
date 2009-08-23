@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Xml.Linq;
 using JetBrains.Application;
 using JetBrains.ComponentModel;
@@ -90,6 +89,9 @@ namespace WhySharper
             try {
                 var content = DownloadSuggestions(SuggestionsXmlSource);
                 lock (_sync) {
+                    if (!Directory.Exists(SuggestionBrowser.Folder)) {
+                        Directory.CreateDirectory(SuggestionBrowser.Folder);
+                    }
                     using (var writer = new StreamWriter(SuggestionBrowser.File, false)) {
                         writer.Write(content);
                     }
