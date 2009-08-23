@@ -27,14 +27,7 @@ namespace WhySharper
         internal static List<Suggestion> GetLocalSuggestions()
         {
             UpdateSuggestionsXml();
-
-            try {
-                return LoadSuggestions();
-            }
-            catch (Exception ex) {
-                Logger.LogException("WhySharper failed to load suggestions xml from " + SuggestionBrowser.File, ex);
-                return new List<Suggestion>();
-            }
+            return GetSuggestions();
         }
         
         /// <summary>
@@ -58,29 +51,34 @@ namespace WhySharper
         {
         }
 
-        private static List<Suggestion> LoadSuggestions()
+        private static List<Suggestion> GetSuggestions()
         {
             var result = new List<Suggestion>();
-            
-            XDocument file;
-            lock (_sync) {
-                file = XDocument.Load(SuggestionBrowser.File);
-            }
 
-            foreach (var suggestion in file.Descendants("suggestion")) {
-                var name = suggestion.Attribute("name");
-                if (name == null) continue;
-
-                var item = new Suggestion(name.Value);
-                foreach (var link in suggestion.Elements("links").Elements("link")) {
-                    var linkName = link.Attribute("name");
-                    if (linkName != null) {
-                        item.Links.Add(new KeyValuePair<string, string>(linkName.Value, link.Value));
-                    }
+            try {
+                XDocument file;
+                lock (_sync) {
+                    file = XDocument.Load(SuggestionBrowser.File);
                 }
-                result.Add(item);
-            }
 
+                foreach (var suggestion in file.Descendants("suggestion")) {
+                    var name = suggestion.Attribute("name");
+                    if (name == null) continue;
+
+                    var item = new Suggestion(name.Value);
+                    foreach (var link in suggestion.Elements("links").Elements("link")) {
+                        var linkName = link.Attribute("name");
+                        if (linkName != null) {
+                            item.Links.Add(new KeyValuePair<string, string>(linkName.Value, link.Value));
+                        }
+                    }
+                    result.Add(item);
+                }
+            }
+            catch (Exception ex) {
+                Logger.LogException("WhySharper failed to load suggestions xml from " + SuggestionBrowser.File, ex);
+                return new List<Suggestion>();
+            }
             return result;
         }
 
@@ -95,12 +93,15 @@ namespace WhySharper
                     using (var writer = new StreamWriter(SuggestionBrowser.File, false)) {
                         writer.Write(content);
                     }
-                    _updated = true;
                 }
             }
             catch (Exception ex) {
                 const string message = "WhySharper failed to download the latest xml from {0} and save it to {1}.";
                 Logger.LogException(string.Format(message, SuggestionsXmlSource, SuggestionBrowser.File), ex);
+            }
+            finally {
+                //Mark it as updated in any case: we don't want to put unnecessary pressure on VS
+                _updated = true;
             }
         }
 
