@@ -2,26 +2,22 @@
 using System.Diagnostics;
 using JetBrains.CommonControls;
 using JetBrains.UI.PopupMenu;
-using WhySharper.Suggestions;
 
-namespace WhySharper
+namespace WhySharper.UI
 {
     /// <summary>
     /// Displays WhySharper popup messages.
     /// </summary>
     internal static class Popup
     {
-        private static readonly SimpleMenuItem _askExplanationMenuItem = 
-            CreateMenuItem("...Have a worthwhile explantion? Let us know!", "http://code.google.com/p/whysharper/issues/list");
-
         /// <summary>
         /// Displays a simple "ask for a suggestion" popup, the idea is that users would submit bugs
         /// if they want to add a suggestion or more discussions to the existing suggestions. Then,
         /// WhySharper contributors would update the xml that gets updated regulary (eg, on each VS startup).
         /// </summary>
-        internal static void SubmitSuggestion() 
+        internal static void SubmitSuggestion(string resharperName) 
         {
-            var menuItems = new List<SimpleMenuItem> { _askExplanationMenuItem };
+            var menuItems = new List<SimpleMenuItem> { CreateExplanationMenuItem(resharperName) };
             Display("Ehm, no clue.", menuItems);
         }
 
@@ -31,11 +27,19 @@ namespace WhySharper
         /// <param name="suggestion">Suggestion to display links for.</param>
         internal static void Display(Suggestion suggestion)
         {
-            var menuItems = suggestion.Links.ConvertAll(i => CreateMenuItem("\"" + i.Key + "\"", i.Value));
+            var menuItems = suggestion.Links.ConvertAll(i => CreateMenuItem("\"" + i.Key + "\"", i.Value, null));
             menuItems.Add(SimpleMenuItem.CreateSeparator());
-            menuItems.Add(_askExplanationMenuItem);
+            menuItems.Add(CreateExplanationMenuItem(suggestion.ResharperName));
 
             Display("How about this", menuItems);
+        }
+
+        private static SimpleMenuItem CreateExplanationMenuItem(string resharperName)
+        {
+            const string text = "...Have a worthwhile explantion? Let us know!";
+            string tooltip = string.Format("ReSharper name is '{0}'", resharperName);
+
+            return CreateMenuItem(text, "http://code.google.com/p/whysharper/issues/list", tooltip);
         }
 
         private static void Display(string caption, List<SimpleMenuItem> menuItems)
@@ -47,10 +51,12 @@ namespace WhySharper
             menu.Show();
         }
 
-        private static SimpleMenuItem CreateMenuItem(string text, string urlOnClick) 
+        private static SimpleMenuItem CreateMenuItem(string text, string urlOnClick, string tooltip) 
         {
             const int maxLength = 80;
-            string tooltip = (urlOnClick.Length < maxLength) ? urlOnClick : urlOnClick.Substring(0, maxLength) + "...";
+            if (tooltip == null) {
+                tooltip = (urlOnClick.Length < maxLength) ? urlOnClick : urlOnClick.Substring(0, maxLength) + "...";
+            }
 
             var item = new SimpleMenuItem { Text = text, Style = MenuItemStyle.Enabled, Tooltip = tooltip };
             item.Clicked += delegate { Process.Start(urlOnClick); };

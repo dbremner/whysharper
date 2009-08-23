@@ -4,14 +4,15 @@ using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Feature.Services.Bulbs;
 using JetBrains.Util;
+using WhySharper.UI;
 
-namespace WhySharper.Suggestions
+namespace WhySharper
 {
     /// <summary>
-    /// Adds one <see cref="WhyBulb"/> of "disable highlighting" type for every given highlighting. 
+    /// Adds a <see cref="WhyBulb"/> of "disable highlighting" type for every given highlighting. 
     /// </summary>
     [DisableHighlightingActionProvider]
-    public class Suggestor : IDisableHighlightingActionProvider
+    public class SuggestionProvider : IDisableHighlightingActionProvider
     {
         /// <summary>
         /// Returns a WhyBulb for the given highlighting.
