@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductName>WhySharper</ProductName>
     <ReSharperVersion2>4.5</ReSharperVersion2>
-    <ProductVersion>1.0.1</ProductVersion>
+    <ProductVersion>1.0</ProductVersion>
     <ProjectGuid>a270fa0f-36da-42be-948c-1b57e885d611</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>$(ProductName) ($(ProductVersion) for R# $(ReSharperVersion2))</OutputName>
+    <OutputName>Why# $(ProductVersion) for R# $(ReSharperVersion2)</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
@@ -62,8 +62,8 @@
       DynUpgradeCode=$(UpgradeCode);
       DynVsVersion=$(VsVersion);
       DynSetupFilesDir=$(SetupFilesDir);
-      DynSuggestionsXmlDir=$(WhySharperHomeDir)\WhySharper\Suggestions;
       DynDllFileDir=$(WhySharperBinariesDir)\$(Configuration);
+      DynSuggestionsXmlDir=$(WhySharperHomeDir)\WhySharper;
       DynDllGuid=$(DllGuid);
       DynPdbGuid=$(PdbGuid);
       DynSuggestionsXmlGuid=$(SuggestionsXmlGuid);

@@ -15,7 +15,7 @@ namespace WhySharper
     [ShellComponentImplementation]
     public partial class Downloader : IXmlExternalizableShellComponent
     {
-        private const string SuggestionsXmlSource = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Suggestions/Suggestions.xml";
+        private const string SuggestionsXmlSource = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Suggestions.xml";
         private static readonly object _sync = new object();
         private static bool _updated;
 
