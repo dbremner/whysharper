@@ -42,19 +42,6 @@
             <Component Id="C.ProductAssemblyPdb" Guid="$(var.DynPdbGuid)" Location="local">
               <File Id="F.ProductAssemblyPdb" Name="WhySharper.pdb" Source="$(var.DynDllFileDir)\WhySharper.pdb" Vital="yes" ReadOnly="yes" Checksum="yes" DiskId="1" KeyPath="yes"/>
             </Component>
-            <Component Id="C.SuggestionsXml" Guid="$(var.DynSuggestionsXmlGuid)" Location="local">
-              <File Id="F.SuggestionsXml" Name="Suggestions.xml" Source="$(var.DynSuggestionsXmlDir)\Suggestions.xml" Vital="yes" ReadOnly="yes" Checksum="yes" DiskId="1" KeyPath="yes"/>
-            </Component>
-
-
-            <!-- AK: copied that from AgentJohnson.. not sure yet if I need it here
-            
-            Cause the one-time-init to happen in R# after the plugin is installed, either per-user or all-users.
-            <Component Id="C.OneTimeInit" Guid="$(var.DynMsiComponentGuid01)" Location="local">
-              <RegistryValue Id="R.OneTimeInit" Root="HKMU" Key="Software\JetBrains\ReSharper\v[RESHARPERVERSION2]\vs[VSVERSION][VSROOTSUFFIX]" Name="One-Time Initialization Generation" Value="[Date]T[Time]" Type="string" Action="write" KeyPath="yes" />
-            </Component>
-            
-            -->
           </Directory>
         </Directory>
       </Directory>
@@ -68,11 +55,6 @@
              Description="Installs the [ProductName] either under the R# directory, or into the user's Local Applocation Data folder.">
       <ComponentRef Id="C.ProductAssembly" />
       <ComponentRef Id="C.ProductAssemblyPdb" />
-      <ComponentRef Id="C.SuggestionsXml" />
-      <!-- AK: copied that from AgentJohnson.. not sure yet if I need it here
-      
-      <ComponentRef Id="C.OneTimeInit" />
-      -->
     </Feature>
 
     <!-- Mount the WiX Wizard Dialogs. -->

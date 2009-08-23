@@ -63,10 +63,8 @@
       DynVsVersion=$(VsVersion);
       DynSetupFilesDir=$(SetupFilesDir);
       DynDllFileDir=$(WhySharperBinariesDir)\$(Configuration);
-      DynSuggestionsXmlDir=$(WhySharperHomeDir)\WhySharper;
       DynDllGuid=$(DllGuid);
       DynPdbGuid=$(PdbGuid);
-      DynSuggestionsXmlGuid=$(SuggestionsXmlGuid);
       DynReSharperVersion2=$(ReSharperVersion2);
     </DefineConstants>
   </PropertyGroup>
