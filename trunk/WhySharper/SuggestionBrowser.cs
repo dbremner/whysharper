@@ -17,7 +17,17 @@ namespace WhySharper
         /// <returns></returns>
         internal static Suggestion GetSuggestion(string suggestionName)
         {
-            return _suggestions.Find(i => i.ResharperName == suggestionName);
+        	var result = _suggestions.Find(i => i.ResharperName == suggestionName);
+			if (result != null)
+				return result;
+
+        	foreach (var suggestion in _suggestions) {
+        		foreach (var alias in suggestion.ResharperNameAliases) {
+					if (alias == suggestionName)
+						return suggestion;
+        		}
+        	}
+            return null;
         }
     }
 }
