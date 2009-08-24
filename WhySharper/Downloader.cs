@@ -62,9 +62,10 @@ namespace WhySharper
 
                 foreach (var suggestion in file.Descendants("suggestion")) {
                     var name = suggestion.Attribute("name");
-                    if (name == null) continue;
+					if (name == null) continue;
 
-                    var item = new Suggestion(name.Value);
+					var aliases = suggestion.Attribute("aliases") ?? new XAttribute("aliases", "");
+					var item = new Suggestion(name.Value, aliases.Value);
                     foreach (var link in suggestion.Elements("links").Elements("link")) {
                         var linkName = link.Attribute("name");
                         if (linkName != null) {

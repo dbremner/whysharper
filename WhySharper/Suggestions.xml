@@ -11,7 +11,7 @@
       <link name="Resharper always suggesting me to make const string instead of string.">http://stackoverflow.com/questions/909681/resharper-always-suggesting-me-to-make-const-string-instead-of-string</link>
     </links>
   </suggestion>
-  <suggestion name="UnusedUsingDirectiveWarning">
+  <suggestion name="UnusedUsingDirectiveWarning" aliases="UnusedUsingDirectiveError">
     <links>
       <link name="What are the benefits of maintaining a 'clean' list of using directives in C#?">http://stackoverflow.com/questions/235250/what-are-the-benefits-of-maintaining-a-clean-list-of-using-directives-in-c</link>
     </links>
