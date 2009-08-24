@@ -19,7 +19,7 @@ namespace WhySharper.UI
         /// <param name="provider">Provides the context for this action: details 
         /// about the project file, document, etc.</param>
         public WhyBulb(ICSharpContextActionDataProvider provider) : base(provider) { }
-
+       
         /// <summary>
         /// Used by <see cref="SuggestionProvider"/> to create a new <see cref="WhyBulb"/> for the given highlighting.
         /// </summary>
@@ -55,7 +55,7 @@ namespace WhySharper.UI
         /// </summary>
         public string Text
         {
-            get { return "...Why " + _whyText  + "?"; }
+            get { return "...Why " + char.ToLower(_whyText[0]) + _whyText.Substring(1) + "?"; }
         }
 
         /// <summary>
