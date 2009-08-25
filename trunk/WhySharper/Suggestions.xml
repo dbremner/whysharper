@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <suggestions>
-  <suggestion name="MemberCanBeMadeStaticLocalWarning">
+  <suggestion name="MemberCanBeMadeStaticLocalWarning" aliases="MemberCanBeMadeStaticSuggestion">
     <links>
       <link name="C# method can be made static, but should it?">http://stackoverflow.com/questions/169378/c-method-can-be-made-static-but-should-it</link>
       <link name="C#: ReSharper complains when method can be static, but isn’t.">http://stackoverflow.com/questions/790281/c-resharper-complains-when-method-can-be-static-but-isnt</link>
@@ -27,4 +27,14 @@
       <link name="Access to Modified Closure (2)">http://stackoverflow.com/questions/235455/access-to-modified-closure</link>
     </links>
   </suggestion>  
+  <suggestion name="CompareNonConstrainedGenericWithNullError">
+    <links>
+      <link name="C#: 'default' keyword with Generics">http://stackoverflow.com/questions/737783/c-default-keyword-with-generics</link>
+    </links>
+  </suggestion>
+  <suggestion name="AccessToStaticMemberViaDerivedTypeError">
+    <links>
+      <link name="Using a class's static member on a derived type?">http://stackoverflow.com/questions/660132/using-a-classs-static-member-on-a-derived-type</link>
+    </links>
+  </suggestion>
 </suggestions>
