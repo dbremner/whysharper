@@ -16,6 +16,11 @@
       <link name="What are the benefits of maintaining a 'clean' list of using directives in C#?">http://stackoverflow.com/questions/235250/what-are-the-benefits-of-maintaining-a-clean-list-of-using-directives-in-c</link>
     </links>
   </suggestion>  
+  <suggestion name="RedundantCatchClauseError">
+    <links>
+      <link name="Why does resharper say 'Catch clause with single 'throw' statement is redundant'?">http://stackoverflow.com/questions/1019237/why-does-resharper-say-catch-clause-with-single-throw-statement-is-redundant</link>
+    </links>
+  </suggestion>  
   <suggestion name="AccessToModifiedClosureError">
     <links>
       <link name="Access to Modified Closure">http://stackoverflow.com/questions/304258</link>
