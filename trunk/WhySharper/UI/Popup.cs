@@ -36,7 +36,7 @@ namespace WhySharper.UI
 
         private static SimpleMenuItem CreateExplanationMenuItem(string resharperName)
         {
-            const string text = "...Have a worthwhile explantion? Let us know!";
+            const string text = "...Looking for an answer? Have a good explanation? Let us know!";
             string tooltip = string.Format("ReSharper name is '{0}'", resharperName);
 
             return CreateMenuItem(text, "http://code.google.com/p/whysharper/issues/list", tooltip);
