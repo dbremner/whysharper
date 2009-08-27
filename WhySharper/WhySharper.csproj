@@ -101,6 +101,9 @@
     <Compile Include="Downloader.IXmlExternalizableComponent.cs">
       <DependentUpon>Downloader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Downloader.IComponent.cs">
+      <DependentUpon>Downloader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Suggestion.cs" />
     <Compile Include="SuggestionBrowser.cs" />
     <Compile Include="SuggestionProvider.cs" />

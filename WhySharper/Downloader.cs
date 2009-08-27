@@ -44,31 +44,10 @@ namespace WhySharper
         internal static List<Suggestion> GetLocalSuggestions()
         {
             UpdateSuggestionsXml();
-            return GetSuggestions();
+            return ParseSuggestions();
         }
         
-        /// <summary>
-        /// Gets called before any solution is loaded. Here we download the the latest version 
-        /// of suggestions.xml from google code and rewrite the local xml.
-        /// </summary>
-        public void Init()
-        {
-            UpdateSuggestionsXml();
-        }
-
-        /// <summary>
-        /// Pairing method to <see cref="Init"/> that's guaranteed to be called by the component container 
-        /// to tear down your component. Performs application-defined tasks associated with freeing, releasing, 
-        /// or resetting unmanaged resources.
-        /// 
-        /// All the components you access from <see cref="Init"/> are guaranteed to exist when <see cref="Dispose"/> 
-        /// is called. Any other components might be missing, and trying to access them will throw an exception.
-        /// </summary>
-        public void Dispose()
-        {
-        }
-
-        private static List<Suggestion> GetSuggestions()
+        private static List<Suggestion> ParseSuggestions()
         {
             var result = new List<Suggestion>();
 
