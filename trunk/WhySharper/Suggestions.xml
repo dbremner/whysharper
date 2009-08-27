@@ -27,7 +27,7 @@
       <link name="Access to Modified Closure (2)">http://stackoverflow.com/questions/235455/access-to-modified-closure</link>
     </links>
   </suggestion>  
-  <suggestion name="CompareNonConstrainedGenericWithNullError">
+  <suggestion name="CompareNonConstrainedGenericWithNullWarning" aliases="CompareNonConstrainedGenericWithNullError">
     <links>
       <link name="C#: 'default' keyword with Generics">http://stackoverflow.com/questions/737783/c-default-keyword-with-generics</link>
     </links>
