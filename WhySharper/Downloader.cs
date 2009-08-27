@@ -27,13 +27,18 @@ namespace WhySharper
     [ShellComponentImplementation]
     public partial class Downloader : IXmlExternalizableShellComponent
     {
-        private const string SuggestionsXmlSource = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Suggestions.xml";
+        private const string RemoteXmlFile = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Suggestions.xml";
+        private const string RemoteVersionFile = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Version.txt";
+
+        private static readonly string Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\JetBrains\\WhySharper";
+        private static readonly string XmlFile = Path.Combine(Folder, "Suggestions.xml");
+        private static readonly string VersionFile = Path.Combine(Folder, "SuggestionsVersion.txt");
+
         private static readonly object _sync = new object();
         private static bool _updated;
 
         /// <summary>
-        /// Returns suggestions from local suggestions.xml - this one should be already overwritten
-        /// with the latest version from google code.
+        /// Updates the local suggestions xml and returns the list of suggestions from it.
         /// </summary>
         /// <returns></returns>
         internal static List<Suggestion> GetLocalSuggestions()
@@ -70,7 +75,7 @@ namespace WhySharper
             try {
                 XDocument file;
                 lock (_sync) {
-                    file = XDocument.Load(SuggestionBrowser.File);
+                    file = XDocument.Load(XmlFile);
                 }
 
                 foreach (var suggestion in file.Descendants("suggestion")) {
@@ -89,7 +94,7 @@ namespace WhySharper
                 }
             }
             catch (Exception ex) {
-                Logger.LogException("WhySharper failed to load suggestions xml from " + SuggestionBrowser.File, ex);
+                Logger.LogException("WhySharper failed to load suggestions xml from " + XmlFile, ex);
                 return new List<Suggestion>();
             }
             return result;
@@ -97,23 +102,21 @@ namespace WhySharper
 
         private static void UpdateSuggestionsXml()
         {
-            if (_updated)
+            if (_updated || IsUpToDate())
                 return;
 
             try {
-                var content = DownloadSuggestions(SuggestionsXmlSource);
+                var content = DownloadFrom(RemoteXmlFile);
                 lock (_sync) {
-                    if (!Directory.Exists(SuggestionBrowser.Folder)) {
-                        Directory.CreateDirectory(SuggestionBrowser.Folder);
-                    }
-                    using (var writer = new StreamWriter(SuggestionBrowser.File, false)) {
+                    EnsureFolderExists();
+                    using (var writer = new StreamWriter(XmlFile, false)) {
                         writer.Write(content);
                     }
                 }
             }
             catch (Exception ex) {
                 const string message = "WhySharper failed to download the latest xml from {0} and save it to {1}.";
-                Logger.LogException(string.Format(message, SuggestionsXmlSource, SuggestionBrowser.File), ex);
+                Logger.LogException(string.Format(message, RemoteXmlFile, XmlFile), ex);
             }
             finally {
                 //Mark it as updated in any case: we don't want to put unnecessary pressure on VS
@@ -121,7 +124,52 @@ namespace WhySharper
             }
         }
 
-        private static string DownloadSuggestions(string source)
+        /// <summary>
+        /// Returns true if local version.txt is the same as the remote one. 
+        /// If both are the same, we don't want to download suggestions.xml.
+        /// </summary>
+        /// <returns></returns>
+        private static bool IsUpToDate()
+        {
+            int? remoteVersion = ParseVersion(false);
+            if (remoteVersion == null) {
+                return false;
+            }
+
+            int? localVersion = ParseVersion(true);
+            if (localVersion == null || localVersion < remoteVersion) {
+                WriteVersion(remoteVersion.Value);
+                return false;
+            }
+
+            return true;
+        }
+
+        private static int? ParseVersion(bool isLocal)
+        {
+            string content = "0";
+            if (isLocal) {
+                if (File.Exists(VersionFile)) {
+                    lock (_sync) {
+                        using (var stream = new StreamReader(VersionFile)) {
+                            content = stream.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            else {
+                content = DownloadFrom(RemoteVersionFile);
+            }
+
+            int version;
+            if (!int.TryParse(content, out version)) {
+                Logger.LogMessage(string.Format("WhySharper suggestions version cannot be parsed, text={0}", content));
+                return null;
+            }
+            return version;
+        }
+
+        private static string DownloadFrom(string source)
         {
             var content = new StringBuilder();
 
@@ -135,6 +183,23 @@ namespace WhySharper
             }
 
             return content.ToString();
+        }
+
+        private static void WriteVersion(int version)
+        {
+            lock (_sync) {
+                EnsureFolderExists();
+                using (var stream = new StreamWriter(VersionFile, false)) {
+                    stream.WriteLine(version);
+                }
+            }
+        }
+
+        private static void EnsureFolderExists()
+        {
+            if (!Directory.Exists(Folder)) {
+                Directory.CreateDirectory(Folder);
+            }
         }
     }
 }
