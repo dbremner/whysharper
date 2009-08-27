@@ -28,7 +28,7 @@ namespace WhySharper
     public partial class Downloader : IXmlExternalizableShellComponent
     {
         private const string RemoteXmlFile = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Suggestions.xml";
-        private const string RemoteVersionFile = "http://whysharper.googlecode.com/svn/trunk/WhySharper/Version.txt";
+        private const string RemoteVersionFile = "http://whysharper.googlecode.com/svn/trunk/WhySharper/SuggestionsVersion.txt";
 
         private static readonly string Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\JetBrains\\WhySharper";
         private static readonly string XmlFile = Path.Combine(Folder, "Suggestions.xml");
@@ -84,8 +84,9 @@ namespace WhySharper
             if (_updated || IsUpToDate())
                 return;
 
+            var content = DownloadFrom(RemoteXmlFile);
+
             try {
-                var content = DownloadFrom(RemoteXmlFile);
                 lock (_sync) {
                     EnsureFolderExists();
                     using (var writer = new StreamWriter(XmlFile, false)) {
@@ -94,8 +95,7 @@ namespace WhySharper
                 }
             }
             catch (Exception ex) {
-                const string message = "WhySharper failed to download the latest xml from {0} and save it to {1}.";
-                Logger.LogException(string.Format(message, RemoteXmlFile, XmlFile), ex);
+                Logger.LogException("WhySharper failed to save the latest xml to " +  XmlFile, ex);
             }
             finally {
                 //Mark it as updated in any case: we don't want to put unnecessary pressure on VS
@@ -152,13 +152,18 @@ namespace WhySharper
         {
             var content = new StringBuilder();
 
-            using (var stream = new WebClient().OpenRead(source)) {
-                var reader = new StreamReader(stream);
-                string line = reader.ReadLine();
-                while (line != null) {
-                    content.AppendLine(line);
-                    line = reader.ReadLine();
+            try {
+                using (var stream = new WebClient().OpenRead(source)) {
+                    var reader = new StreamReader(stream);
+                    string line = reader.ReadLine();
+                    while (line != null) {
+                        content.AppendLine(line);
+                        line = reader.ReadLine();
+                    }
                 }
+            }
+            catch (Exception ex) {
+                Logger.LogException("Failed to load remote file from " + source, ex);
             }
 
             return content.ToString();

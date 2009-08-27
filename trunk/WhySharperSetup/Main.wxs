@@ -27,8 +27,8 @@
     </Property>
 
     <Upgrade Id="$(var.DynUpgradeCode)">
-      <UpgradeVersion Property="PATCHFOUND" IncludeMinimum="yes" IncludeMaximum='no' Minimum="0.0.0" Maximum="$(var.DynProductVersion).0" />
-      <UpgradeVersion Property="CANNOTUPGRADENEWER" IncludeMaximum="yes" Minimum="$(var.DynProductVersion).0" Maximum="127.0.0" OnlyDetect='yes' />
+      <UpgradeVersion Property="PATCHFOUND" IncludeMinimum="yes" IncludeMaximum='no' Minimum="0.0.0.0" Maximum="$(var.DynProductVersion)" />
+      <UpgradeVersion Property="CANNOTUPGRADENEWER" IncludeMaximum="yes" Minimum="$(var.DynProductVersion)" Maximum="127.0.0.0" OnlyDetect='yes' />
     </Upgrade>
 
     <!-- Directory structure for the plugin. -->
