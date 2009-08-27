@@ -18,9 +18,6 @@ namespace WhySharper
 {
     internal static class SuggestionBrowser
     {
-        internal static readonly string Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\JetBrains\\WhySharper";
-        internal static readonly string File = string.Format("{0}\\Suggestions.xml", Folder);
-
         private static readonly List<Suggestion> _suggestions = Downloader.GetLocalSuggestions();
 
         /// <summary>
