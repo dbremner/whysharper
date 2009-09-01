@@ -51,5 +51,10 @@
     <links>
       <link name="What are the benefits to marking a field as 'readonly' in C#?">http://stackoverflow.com/questions/277010/what-are-the-benefits-to-marking-a-field-as-readonly-in-c</link>
     </links>
-  </suggestion>  
+  </suggestion>
+  <suggestion name="UnusedVariableWarning">
+    <links>
+      <link name="How to change 'local variable is never used' to be a suggestion.">http://stackoverflow.com/questions/1336342/resharper-how-to-change-local-variable-is-never-used-to-be-a-suggestion</link>
+    </links>
+  </suggestion>
 </suggestions>
