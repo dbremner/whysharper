@@ -49,7 +49,7 @@
   </suggestion>
   <suggestion name="FieldCanBeMadeReadOnlyLocalWarning">
     <links>
-      <link name="Resharper changing fields to readonly">http://stackoverflow.com/questions/1344424/resharper-changing-fields-to-readonly</link>
+      <link name="What are the benefits to marking a field as 'readonly' in C#?">http://stackoverflow.com/questions/277010/what-are-the-benefits-to-marking-a-field-as-readonly-in-c</link>
     </links>
   </suggestion>  
 </suggestions>
