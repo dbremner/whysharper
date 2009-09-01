@@ -37,4 +37,19 @@
       <link name="Using a class's static member on a derived type?">http://stackoverflow.com/questions/660132/using-a-classs-static-member-on-a-derived-type</link>
     </links>
   </suggestion>
+  <suggestion name="BaseTypeForParameterWarning" aliases="BaseTypeForParameterSuggestion">
+    <links>
+      <link name="C#: Resharper suggests parameter can be of type 'BaseType'">http://stackoverflow.com/questions/1357727/c-resharper-suggests-parameter-can-be-of-type-basetype</link>
+    </links>
+  </suggestion>
+  <suggestion name="ConvertToAutoPropertyWarning" aliases="ConvertToAutoPropertySuggestion">
+    <links>
+      <link name="C# 3.0 Auto-Properties - useful or not?">http://stackoverflow.com/questions/9304/c-3-0-auto-properties-useful-or-not</link>
+    </links>
+  </suggestion>
+  <suggestion name="FieldCanBeMadeReadOnlyLocalWarning">
+    <links>
+      <link name="Resharper changing fields to readonly">http://stackoverflow.com/questions/1344424/resharper-changing-fields-to-readonly</link>
+    </links>
+  </suggestion>  
 </suggestions>
