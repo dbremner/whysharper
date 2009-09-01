@@ -42,7 +42,7 @@
       <link name="C#: Resharper suggests parameter can be of type 'BaseType'">http://stackoverflow.com/questions/1357727/c-resharper-suggests-parameter-can-be-of-type-basetype</link>
     </links>
   </suggestion>
-  <suggestion name="ConvertToAutoPropertyWarning" aliases="ConvertToAutoPropertySuggestion">
+  <suggestion name="ConvertToAutoPropertyWarning" aliases="ConvertToAutoPropertySuggestion,ConvertToAutoPropertyWithPrivateSetterWarning">
     <links>
       <link name="C# 3.0 Auto-Properties - useful or not?">http://stackoverflow.com/questions/9304/c-3-0-auto-properties-useful-or-not</link>
     </links>
