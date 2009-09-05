@@ -59,7 +59,7 @@
   </suggestion>
   <suggestion name="RedundantBaseQualifierWarning" aliases="RedundantBaseQualifierWarningError,RedundantThisQualifierWarning,RedundantThisQualifierWarningError">
     <links>
-      <link name="Is using "base" bad practice even though it might be good for readability?">http://stackoverflow.com/questions/1049908/is-using-base-bad-practice-even-though-it-might-be-good-for-readability</link>
+      <link name="Is using 'base' bad practice even though it might be good for readability?">http://stackoverflow.com/questions/1049908/is-using-base-bad-practice-even-though-it-might-be-good-for-readability</link>
     </links>
   </suggestion>
 </suggestions>
