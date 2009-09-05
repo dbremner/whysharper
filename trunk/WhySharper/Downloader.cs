@@ -104,15 +104,15 @@ namespace WhySharper
         }
 
         /// <summary>
-        /// Returns true if local version.txt is the same as the remote one. 
-        /// If both are the same, we don't want to download suggestions.xml.
+        /// Returns true if local version is the same or above the remote one 
+        /// (in which case we don't want to download suggestions.xml).
         /// </summary>
         /// <returns></returns>
         private static bool IsUpToDate()
         {
             int? remoteVersion = ParseVersion(false);
             if (remoteVersion == null) {
-                return false;
+                return true; //as we probably wouldn't be able to download the xml as well
             }
 
             int? localVersion = ParseVersion(true);
