@@ -57,4 +57,9 @@
       <link name="How to change 'local variable is never used' to be a suggestion.">http://stackoverflow.com/questions/1336342/resharper-how-to-change-local-variable-is-never-used-to-be-a-suggestion</link>
     </links>
   </suggestion>
+  <suggestion name="RedundantBaseQualifierWarning" aliases="RedundantBaseQualifierWarningError,RedundantThisQualifierWarning,RedundantThisQualifierWarningError">
+    <links>
+      <link name="Is using "base" bad practice even though it might be good for readability?">http://stackoverflow.com/questions/1049908/is-using-base-bad-practice-even-though-it-might-be-good-for-readability</link>
+    </links>
+  </suggestion>
 </suggestions>
