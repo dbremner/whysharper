@@ -47,7 +47,7 @@
       <link name="C# 3.0 Auto-Properties - useful or not?">http://stackoverflow.com/questions/9304/c-3-0-auto-properties-useful-or-not</link>
     </links>
   </suggestion>
-  <suggestion name="FieldCanBeMadeReadOnlyLocalWarning">
+  <suggestion name="FieldCanBeMadeReadOnlyLocalWarning" aliases="FieldCanBeMadeReadOnlySuggestion">
     <links>
       <link name="What are the benefits to marking a field as 'readonly' in C#?">http://stackoverflow.com/questions/277010/what-are-the-benefits-to-marking-a-field-as-readonly-in-c</link>
     </links>
