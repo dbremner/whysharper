@@ -21,7 +21,7 @@
       <link name="Why does resharper say 'Catch clause with single 'throw' statement is redundant'?">http://stackoverflow.com/questions/1019237/why-does-resharper-say-catch-clause-with-single-throw-statement-is-redundant</link>
     </links>
   </suggestion>  
-  <suggestion name="AccessToModifiedClosureError">
+  <suggestion name="AccessToModifiedClosureWarning" aliases="AccessToModifiedClosureError">
     <links>
       <link name="Access to Modified Closure">http://stackoverflow.com/questions/304258</link>
       <link name="Access to Modified Closure (2)">http://stackoverflow.com/questions/235455/access-to-modified-closure</link>
